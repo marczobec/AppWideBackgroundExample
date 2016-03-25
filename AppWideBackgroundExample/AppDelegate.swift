@@ -14,8 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? = UIWindow(frame: UIScreen.mainScreen().bounds)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let navigationController = UINavigationController(rootViewController: FirstViewController())
+        navigationController.navigationBarHidden = true
         
-        window?.rootViewController = UINavigationController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }

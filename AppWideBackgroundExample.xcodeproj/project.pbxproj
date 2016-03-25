@@ -10,6 +10,8 @@
 		B65F723A1CA580AF006DE8FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65F72391CA580AF006DE8FD /* AppDelegate.swift */; };
 		B65F72411CA580AF006DE8FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B65F72401CA580AF006DE8FD /* Assets.xcassets */; };
 		B65F72441CA580AF006DE8FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B65F72421CA580AF006DE8FD /* LaunchScreen.storyboard */; };
+		B65F724D1CA582E9006DE8FD /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65F724C1CA582E9006DE8FD /* FirstViewController.swift */; };
+		B65F724F1CA5832A006DE8FD /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65F724E1CA5832A006DE8FD /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		B65F72401CA580AF006DE8FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B65F72431CA580AF006DE8FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B65F72451CA580AF006DE8FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B65F724C1CA582E9006DE8FD /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		B65F724E1CA5832A006DE8FD /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				B65F72391CA580AF006DE8FD /* AppDelegate.swift */,
+				B65F724C1CA582E9006DE8FD /* FirstViewController.swift */,
+				B65F724E1CA5832A006DE8FD /* SecondViewController.swift */,
 				B65F724B1CA5812E006DE8FD /* Supporting Files */,
 			);
 			path = AppWideBackgroundExample;
@@ -136,7 +142,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65F724F1CA5832A006DE8FD /* SecondViewController.swift in Sources */,
 				B65F723A1CA580AF006DE8FD /* AppDelegate.swift in Sources */,
+				B65F724D1CA582E9006DE8FD /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
