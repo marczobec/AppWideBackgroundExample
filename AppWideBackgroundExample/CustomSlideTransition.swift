@@ -24,6 +24,11 @@ class CustomSlideTransition: NSObject, UIViewControllerAnimatedTransitioning {
         containerView.addSubview(fromViewController.view)
         containerView.addSubview(toViewController.view)
         
+        let toView = toViewController.view
+        toView.frame = transitionFrames.toView.end
+        toView.setNeedsLayout()
+        toView.layoutIfNeeded()
+        
         toViewController.view.frame = transitionFrames.toView.start
         
         UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveLinear, animations: { () -> Void in
