@@ -12,11 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow(frame: UIScreen.mainScreen().bounds)
+    let navigationControllerDelegate = NavigationControllerDelegate()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         addBackgroundView()
+        
         let navigationController = UINavigationController(rootViewController: FirstViewController())
         navigationController.navigationBarHidden = true
+        navigationController.delegate = navigationControllerDelegate
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
@@ -36,3 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
+    
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomSlideTransition(transitionOperation: operation)
+    }
+    
+}
