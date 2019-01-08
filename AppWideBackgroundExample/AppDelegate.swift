@@ -11,14 +11,14 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow? = UIWindow(frame: UIScreen.mainScreen().bounds)
+    var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     let navigationControllerDelegate = NavigationControllerDelegate()
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         addBackgroundView()
         
         let navigationController = UINavigationController(rootViewController: FirstViewController())
-        navigationController.navigationBarHidden = true
+        navigationController.isNavigationBarHidden = true
         navigationController.delegate = navigationControllerDelegate
         
         window?.rootViewController = navigationController
@@ -27,21 +27,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func addBackgroundView() {
+        guard let window = window else { return }
+        
         let backgroundView = BackgroundView()
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        window?.addSubview(backgroundView)
+        window.addSubview(backgroundView)
         
-        backgroundView.centerXAnchor.constraintEqualToAnchor(window?.centerXAnchor).active = true
-        backgroundView.centerYAnchor.constraintEqualToAnchor(window?.centerYAnchor).active = true
-        backgroundView.widthAnchor.constraintEqualToAnchor(window?.widthAnchor).active = true
-        backgroundView.heightAnchor.constraintEqualToAnchor(window?.heightAnchor).active = true
+        NSLayoutConstraint.activate([
+            backgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor),
+            backgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor),
+            backgroundView.widthAnchor.constraint(equalTo: window.widthAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: window.heightAnchor),
+            ])
     }
 
 }
 
 class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
     
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomSlideTransition(transitionOperation: operation)
     }
     

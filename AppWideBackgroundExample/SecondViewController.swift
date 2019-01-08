@@ -11,32 +11,34 @@ import UIKit
 class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
-        view.backgroundColor = .clearColor()
+        view.backgroundColor = .clear
         
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "SecondViewController"
-        titleLabel.textColor = .whiteColor()
-        titleLabel.font = UIFont.systemFontOfSize(24.0)
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.systemFont(ofSize: 24.0)
         view.addSubview(titleLabel)
         
-        let backButton = UIButton(type: .System)
+        let backButton = UIButton(type: .system)
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.backgroundColor = .lightGrayColor()
-        backButton.setTitle("Back to FirstViewController", forState: .Normal)
-        backButton.setTitleColor(.whiteColor(), forState: .Normal)
-        backButton.addTarget(self, action: #selector(didTapBackButton(_:)), forControlEvents: .TouchUpInside)
+        backButton.backgroundColor = .lightGray
+        backButton.setTitle("Back to FirstViewController", for: .normal)
+        backButton.setTitleColor(.white, for: .normal)
+        backButton.addTarget(self, action: #selector(didTapBackButton), for: .primaryActionTriggered)
         view.addSubview(backButton)
         
-        titleLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        titleLabel.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: 16.0).active = true
-        
-        backButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        backButton.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16.0),
+            
+            backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            ])
     }
     
-    func didTapBackButton(button: UIButton) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @objc func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     init() { super.init(nibName: nil, bundle: nil) }

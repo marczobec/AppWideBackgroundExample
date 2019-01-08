@@ -12,19 +12,21 @@ class BackgroundView: UIView {
     
     init() {
         super.init(frame: .zero)
-        backgroundColor = .redColor()
+        backgroundColor = .red
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Background View"
-        label.textColor = .whiteColor()
-        label.font = UIFont.systemFontOfSize(32.0, weight: UIFontWeightBold)
-        label.transform = CGAffineTransformMakeRotation(45);
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 32.0, weight: .bold)
+        label.transform = CGAffineTransform.init(rotationAngle: 45.0)
         label.alpha = 0.5
         addSubview(label)
         
-        label.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
-        label.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+            ])
     }
     
     required init?(coder aDecoder: NSCoder) { return nil }

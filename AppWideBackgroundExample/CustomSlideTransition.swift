@@ -12,34 +12,37 @@ class CustomSlideTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     let transitionFrames: CustomSlideTransitionFrames
     
-    init(transitionOperation: UINavigationControllerOperation) {
-        transitionFrames = CustomSlideTransitionFrames(transitionOperation: transitionOperation, slideViewSize: UIScreen.mainScreen().bounds.size)
+    init(transitionOperation: UINavigationController.Operation) {
+        transitionFrames = CustomSlideTransitionFrames(transitionOperation: transitionOperation, slideViewSize: UIScreen.main.bounds.size)
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        guard let containerView = transitionContext.containerView() else { return }
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard
+            let fromController = transitionContext.viewController(forKey: .from),
+            let toController = transitionContext.viewController(forKey: .to),
+            let toView = toController.view
+            else { return }
         
-        containerView.addSubview(fromViewController.view)
-        containerView.addSubview(toViewController.view)
+        let containerView = transitionContext.containerView
         
-        let toView = toViewController.view
+        containerView.addSubview(fromController.view)
+        containerView.addSubview(toController.view)
+        
         toView.frame = transitionFrames.toView.end
         toView.setNeedsLayout()
         toView.layoutIfNeeded()
         
-        toViewController.view.frame = transitionFrames.toView.start
+        toController.view.frame = transitionFrames.toView.start
         
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveLinear, animations: { () -> Void in
-            toViewController.view.frame = self.transitionFrames.toView.end
-            fromViewController.view.frame = self.transitionFrames.fromView.end
-        }) { (_) -> Void in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .curveLinear, animations: {
+            toController.view.frame = self.transitionFrames.toView.end
+            fromController.view.frame = self.transitionFrames.fromView.end
+        }) { (completed) in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
     
@@ -51,8 +54,8 @@ struct CustomSlideTransitionFrames {
     var fromView: TransitionFrame
     var toView: TransitionFrame
     
-    init(transitionOperation: UINavigationControllerOperation, slideViewSize: CGSize) {
-        let direction: CGFloat = (transitionOperation == .Push) ? 1.0 : (transitionOperation == .Pop) ? -1.0 : 0.0
+    init(transitionOperation: UINavigationController.Operation, slideViewSize: CGSize) {
+        let direction: CGFloat = (transitionOperation == .push) ? 1.0 : (transitionOperation == .pop) ? -1.0 : 0.0
         let frame = CGRect(origin: .zero, size: slideViewSize)
         
         fromView = (
